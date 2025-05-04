@@ -1,0 +1,26 @@
+services:
+  devdb:
+    image: bitnami/postgresql
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+    volumes:
+      - dentira-volume:/bitnami/postgresql
+    restart: always
+  
+  jenkins:
+    image: jenkins/jenkins
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    volumes: 
+      - jenkins-volume:/var/jenkins
+    restart: always
+
+
+volumes:
+  dentira-volume:
+  jenkins-volume:
